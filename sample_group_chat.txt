@@ -1,0 +1,47 @@
+janet : Dr Ahmed how did it sond to you 
+janet : sound? 
+Dr. Ahmed : well 
+janet : how does it compare to Centra 
+Dr. Ahmed : it is good to a certain level 
+Tom : Some echoes initially. Occasional breaking up that got worse towards the end. I found Dan quite readily understandable, but then I am familiar with his accent. 
+janet : yes indeed you are Tom!!! 
+janet : who has turned themselves pink? 
+Alec Hunter-Moore : It would be interesting to use a speech-to-text system to feed into this chat window 
+Dr.  Ahmed  :  however,  I  hope  the  presenter  be  more  specific about project history and background 
+danielm : The sound quality is just so crucial -  that as ling as it holds the event can work 
+janet : yes – it seems strange now typing after talking I  think 
+danielm  :  Dr  Ahmed  –  what  would  you  like  to  know  about project history 
+Dr. Ahmed : I.e. is it part of your Ph D 
+Alec Hunter-Moore : Now several people are typing at once the scrolling in the chat window has gone mad!  
+Alec Hunter-Moore : My direct interest is an upcoming project for delivering an e-commerce course online replacing a paper-based distance learning method 
+Hasan : Janet, what is the audio capability with placeware? 
+janet : ah – you should talk to Dr Ahmed that is his area
+janet : none Hasan 
+janet : you can use it with conference call on the phone or Real Player – there is none built in 
+Hasan : Dr. Ahmed is the expert in this field... 
+danielm : Hi everyone – its hard butting in but I’m going to do it... 
+Alec Hunter-Moore : Whoops – we are now getting the other common problem – which answer relates to which question 
+janet : OK – hang on a second 
+Alec Hunter-Moore : Now I have it 
+janet : ok do you see it now? 
+danielm  : Goodbye Dr Ahmed 
+janet : simultaneous typing!! 
+Alec Hunter-Moore : I like this system - you get the answer before the question 
+danielm : Yes – but sometimes it’s an answer to something completely different 
+danielr : I wasn’t looking at the feedback icon!! 
+Evan : I felt like you were just reading the material. It needed something to bring it to life. 
+danielr : my girlfriend says I have a nice voice too!!! 
+Evan : Like graphics... or a video clip or something... 
+janet : you should see what he’s wearing!!!!! 
+janet : like when? 
+danielr : It felt a little flat for me too... you need a live audience methinks to put you on your mettle and to give you a sense of engagement 
+Evan : Janet. The opportunity for side chats doesn’t seem  appropriate during a lecture-type format like this. Maybe if you were using this for holding a meeting
+janet : how do you think that could be improved Dan? 
+Evan : Can you turn off the 1-1 feature, Janet? 
+danielr : what – my sartorial splendour? 
+janet : yes you can and audience chat 
+Evan : And turn it on after the presentation 
+janet : but my aim here is to collect your chat 
+danielr : it would be nice to see images of your audience 
+
+
