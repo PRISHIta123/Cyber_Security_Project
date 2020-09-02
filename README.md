@@ -8,4 +8,6 @@ To start the initial blockchain, run the following command after entering the di
 
 ```node CryptoBlockchain.js```
 
+You will see the created nodes as follows:  
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc.JPG)
 
