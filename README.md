@@ -31,6 +31,8 @@ To start the initial blockchain, run the following command after entering the di
 You will see the created nodes as follows:  
 ![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc.JPG)
 
+**Additional Security**
+
 To increase security, a random nonce generator is used, that will be used in the hash creation. Moreover, to increase the time taken to mine individual blocks, a difficulty index is used to append additional zeros to the generated hash, which increases the mining time complexity. Also to validate the cryptocurrency blockchain, for every pair consisting of the current block and its preceding block, a two-fold validation methodology is utilized.   
 
 1. The hash of the current block is recomputed with the same nonce, and the original and recomputed hash values are compared.  
