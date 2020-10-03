@@ -1,33 +1,43 @@
 const SHA256 = require('crypto-js/sha256');
+
+class Transaction
+{
+    constructor(fromAddress, toAddress, amount)
+    {
+        this.fromAddress = fromAddress;
+        this.toAddress = toAddress;
+        this.amount = amount;
+    }
+}
+
 class CryptoBlock{
-    constructor(index, timestamp, data, precedingHash=" "){
-     this.index = index;
+    constructor(timestamp, transactions, precedingHash=" "){
      this.timestamp = timestamp;
-     this.data = data;
+     this.transactions = transactions;
      this.precedingHash = precedingHash;
      this.hash = this.computeHash();     
      this.nonce = 0;
     }
 
-    //Function to compute the current hash based on the preceding hash, timestamp, data and random nonce
+    //Function to compute the current hash based on the preceding hash, timestamp, transactions and random nonce
     computeHash() {
     return SHA256(
-      this.index +
         this.precedingHash +
         this.timestamp +
-        JSON.stringify(this.data) +
+        JSON.stringify(this.transactions) +
         this.nonce
     ).toString();
   }
 
   //To increase difficulty level while mining blocks by appending extra zeros to the hash
-  proofOfWork(difficulty) {
+  mineBlock(difficulty) {
     while (
       this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")
     ) {
       this.nonce++;
       this.hash = this.computeHash();
     }
+    console.log("Block Mined: "+ this.hash)
   }
 }
 
@@ -35,7 +45,8 @@ class CryptoBlockchain{
     constructor(){
         this.blockchain = [this.startGenesisBlock()];   
         this.difficulty = 4;
-  
+        this.pendingTransactions = [];
+        this.miningReward = 100;
     }
 
     //Function to create initial block in the crytocurrency blockchain
@@ -48,12 +59,49 @@ class CryptoBlockchain{
         return this.blockchain[this.blockchain.length - 1];
     }
 
-    //Function to add an additional block to the blockchain
-    addNewBlock(newBlock){
-        newBlock.precedingHash = this.obtainLatestBlock().hash;
-       //newBlock.hash = newBlock.computeHash();
-        newBlock.proofOfWork(this.difficulty);
-        this.blockchain.push(newBlock);
+    //Function to add an additional block to the blockchain and create an empty transaction for this block
+    minePendingTransactions(miningRewardAddress)
+    {
+        let block= new CryptoBlock(Date.now(), this.pendingTransactions);
+        block.mineBlock(this.difficulty);
+
+        console.log('Block successfully mined!');
+        this.blockchain.push(block);
+
+        this.pendingTransactions= [
+        new Transaction(null, miningRewardAddress, this.miningReward)
+        ];
+
+    }
+
+    //Add new transaction to log array
+    createTransaction(transaction)
+    {
+        this.pendingTransactions.push(transaction);
+    }
+
+ //Function to perform the transaction between the intended sender and recipient blocks given their addresses
+    getBalanceOfAddress(address)
+    {
+        let balance= 0;
+
+        for(const block of this.blockchain)
+        {
+            for(const trans of block.transactions)
+            {
+                if(trans.fromAddress === address)
+                {
+                    balance-= trans.amount;
+                }
+
+                if(trans.toAddress === address)
+                {
+                    balance+= trans.amount;
+                }
+            }
+        }
+
+        return balance;
     }
 
     //Function to authenticate every pair of nodes/blocks in the cryptocurrency blockchain
@@ -72,26 +120,15 @@ class CryptoBlockchain{
 }
 
 let smashingCoin = new CryptoBlockchain();
+smashingCoin.createTransaction( new Transaction("addr1","addr2",100));
+smashingCoin.createTransaction( new Transaction("addr2","addr1",50));
 
-console.log("smashingCoin mining in progress....");
-smashingCoin.addNewBlock(
-  new CryptoBlock(1, "01/06/2020", {
-    sender: "XYZ",
-    recipient: "ABC",
-    quantity: 50
-  })
-);
+console.log("Starting the miner...");
+smashingCoin.minePendingTransactions("myAddress");
+console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
 
-smashingCoin.addNewBlock(
-  new CryptoBlock(2, "01/07/2020", {
-    sender: "PQR",
-    recipient: "LMN",
-    quantity: 100
-  })
-);
+console.log("Starting the miner again...");
+smashingCoin.minePendingTransactions("myAddress");
+console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
 
-console.log("Is the blockchain valid? "+ smashingCoin.checkChainValidity());
-console.log(JSON.stringify(smashingCoin, null, 4));
 
-smashingCoin.blockchain[1].data = {amount: 200};
-console.log("Is the blockchain valid? "+ smashingCoin.checkChainValidity());
