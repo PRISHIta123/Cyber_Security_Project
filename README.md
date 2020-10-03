@@ -43,5 +43,20 @@ If a mismatch is found in either of these two steps, the validation function ret
 The resulting cryptocurrency blockchain after integrating these additional functionalities is as follows:  
 ![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc1.JPG)
 
-Here, the red highlights denote the appended zeros based on the difficulty index and the green highlights are the random nonces generated to compute the hash for every new block is added
+Here, the red highlights denote the appended zeros based on the difficulty index and the green highlights are the random nonces generated to compute the hash for every new block is added.
+
+When we observe and log the output of the check chain validity function, before tampering with any one of the blocks, it returns the value true, implying that the blockchain is valid.
+
+```console.log("Is the blockchain valid?"+ smashingCoin.checkChainValidity());```
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/true.JPG)
+
+If instead we try to change the transfer quantity of block 1 from 50 to 200 in the chain, the function returns a value of false, implying an authentication error. 
+
+```smashingCoin.blockchain[1].data = {amount: 200};```
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/false.JPG)
+
+
+
 
