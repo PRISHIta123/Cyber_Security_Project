@@ -1,4 +1,6 @@
 const SHA256 = require('crypto-js/sha256');
+const EC= require('elliptic').ec;
+const ec= new EC('secp256k1');
 
 class Transaction
 {
@@ -7,6 +9,41 @@ class Transaction
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;
         this.amount = amount;
+    }
+
+    calculateHash()
+    {
+        return SHA256(this.fromAddress + this.toAddress + this.amount).toString();
+    }
+
+    signTransaction(signingKey)
+    {
+        if(signingKey.getPublic('hex') !== this.fromAddress )
+        {
+            throw new Error('You cannot sign transaction for other wallets.');
+        }
+
+        const hashTx= this.calculateHash();
+        const sig= signingKey.sign('hashTx','base64');
+        this.signature= sig.toDER('hex');
+    }
+
+    isValid()
+    {
+        if(this.fromAddress === null) 
+            {
+                console.log("1");
+                return true;
+            }
+
+        if(this.signature.length === 0)
+        {
+            throw new Error('No signature in this transaction.');
+        }
+
+        const publicKey= ec.keyFromPublic(this.fromAddress, 'hex');
+        return publicKey.verify(this.calculateHash(), this.signature);
+
     }
 }
 
@@ -75,8 +112,21 @@ class CryptoBlockchain{
     }
 
     //Add new transaction to log array
-    createTransaction(transaction)
+    addTransaction(transaction)
     {
+
+        if(!transaction.fromAddress || !transaction.toAddress)
+        {
+            console.log(transaction.fromAddress);
+            console.log(transaction.toAddress);
+            throw new Error('Transaction must include from and to address');
+        }
+
+        if(!transaction.isValid())
+        {
+            throw new Error('Cannot add invalid transaction to blockchain');
+        }
+
         this.pendingTransactions.push(transaction);
     }
 
@@ -110,25 +160,22 @@ class CryptoBlockchain{
       const currentBlock = this.blockchain[i];
       const precedingBlock = this.blockchain[i - 1];
 
+      if(!currentBlock.hasValidTransactions())
+      {
+        return false;
+      }
+
       if (currentBlock.hash !== currentBlock.computeHash()) {
         return false;
       }
+
       if (currentBlock.precedingHash !== precedingBlock.hash) return false;
     }
     return true;
   }
 }
 
-let smashingCoin = new CryptoBlockchain();
-smashingCoin.createTransaction( new Transaction("addr1","addr2",100));
-smashingCoin.createTransaction( new Transaction("addr2","addr1",50));
-
-console.log("Starting the miner...");
-smashingCoin.minePendingTransactions("myAddress");
-console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
-
-console.log("Starting the miner again...");
-smashingCoin.minePendingTransactions("myAddress");
-console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
+module.exports.CryptoBlockchain= CryptoBlockchain;
+module.exports.Transaction= Transaction;
 
 
