@@ -58,6 +58,7 @@ If instead we try to change the transfer quantity of block 1 from 50 to 200 in t
 ![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/false.JPG)
 
 **Performing Transactions**  
+
 To perform transactions between the intended sender and recipient blocks or nodes, their addresses are mined, such that the transaction amount can be deducted from the sender node and added to the receiver node. An array contains the records of pending transactions for every block starting with a null amount transaction for the genesis block, and subsequently stores every new transaction. 
 
 An example for demonstration is as follows, the first block sends 100 cryptocurrency units to the second block. The second block in turn returns 50 cryptocurrency units back to the first block. Hence the transaction array will contain the details of the transactions with amounts null, 100 and 50 respectively. After every successfull transaction for a particular genesis block, a mining reward of 100 points is added to its balance.  
