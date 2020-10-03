@@ -90,4 +90,8 @@ smashingCoin.addNewBlock(
   })
 );
 
+console.log("Is the blockchain valid? "+ smashingCoin.checkChainValidity());
 console.log(JSON.stringify(smashingCoin, null, 4));
+
+smashingCoin.blockchain[1].data = {amount: 200};
+console.log("Is the blockchain valid? "+ smashingCoin.checkChainValidity());
