@@ -80,7 +80,7 @@ console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
 
 **Signature**  
 
-To ensure that every transaction is unique, it is signed with a signature is generated using the private and public key and calculated hash for a block, using the elliptic library (based on elliptic curve cryptography). This is also used as a security measure to authenticate every transaction. The following image describes a transaction of 10 crytocurrency units from the genesis block, and a reception of 100 cryptocurrency units by the genesis block.  
+To ensure that every transaction is unique, it is signed with a signature which is generated using the private and public key and calculated hash for a block, using the elliptic library (based on elliptic curve cryptography). This is also used as a security measure to authenticate every transaction. The following image describes a transaction of 10 cryptocurrency units from the genesis block, and a reception of 100 cryptocurrency units by the genesis block.  
 
 ```let smashingCoin = new CryptoBlockchain();
 
