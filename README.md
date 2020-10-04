@@ -78,5 +78,26 @@ console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
 
 ![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/transaction.JPG)
 
+**Signature**  
+
+To ensure that every transaction is unique, it is signed with a signature is generated using the private and public key and calculated hash for a block, using the elliptic library (based on elliptic curve cryptography). This is also used as a security measure to authenticate every transaction. The following image describes a transaction of 10 crytocurrency units from the genesis block, and a reception of 100 cryptocurrency units by the genesis block.  
+
+```let smashingCoin = new CryptoBlockchain();
+
+const tx1 = new Transaction(myWalletAddress,'public_key',10);
+tx1.signTransaction(myKey);
+smashingCoin.addTransaction(tx1);
+
+console.log("Starting the miner...");
+smashingCoin.minePendingTransactions(myWalletAddress);
+console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
+
+console.log("Starting the miner again...");
+smashingCoin.minePendingTransactions(myWalletAddress);
+console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
+```
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/sign.JPG)
+
 
 
