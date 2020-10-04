@@ -24,7 +24,7 @@ class Transaction
         }
 
         const hashTx= this.calculateHash();
-        const sig= signingKey.sign('hashTx','base64');
+        const sig= signingKey.sign(hashTx,'base64');
         this.signature= sig.toDER('hex');
     }
 
@@ -42,6 +42,7 @@ class Transaction
         }
 
         const publicKey= ec.keyFromPublic(this.fromAddress, 'hex');
+        console.log("The signature is: "+this.signature);
         return publicKey.verify(this.calculateHash(), this.signature);
 
     }
