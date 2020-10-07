@@ -124,5 +124,11 @@ console.log(global.smashingCoin.pendingTransactions)
 
 ![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/DSA.JPG)
 
+As seen above, the same sender hash address (highlighted in yellow) is involved in two transactions of 10 cryptocurrency units each (underlined in blue), but with different receiver hash addresses. Thus, if these 2 transactions are performed simultaneously (i.e. at the same timestamp), only 10 units will be deducted from his balance at the same time, whereas his actual deduction amount should be 20. The sender can thus exploit this issue to his advantage, and perform many such transactions, but by paying only half the actual amount.  
+
+**Network Observers**  
+
+
+
 
 
