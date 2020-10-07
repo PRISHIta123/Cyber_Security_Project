@@ -1,5 +1,4 @@
 const {CryptoBlockchain, Transaction}= require('./CryptoBlockchain');
-const {Attacker}= require('./Attacker');
 const EC= require('elliptic').ec;
 const ec= new EC('secp256k1');
 
@@ -19,6 +18,8 @@ const recvWalletAddress = recvKey.getPublic('hex');
 return recvWalletAddress;
 }
 
+console.log("\nYour initial balance is: "+ 10);
+
 global.smashingCoin = new CryptoBlockchain();
 
 const recv_address= fetchAddress();
@@ -27,25 +28,17 @@ const tx1 = new Transaction(myWalletAddress,recv_address,10);
 tx1.signTransaction(myKey);
 global.smashingCoin.addTransaction(tx1);
 
-console.log("Starting the miner...");
-global.smashingCoin.minePendingTransactions(myWalletAddress);
-console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
+console.log(global.smashingCoin.pendingTransactions)
 
-console.log("Starting the miner again...");
-global.smashingCoin.minePendingTransactions(myWalletAddress);
-console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
+new_address= fetchAddress();
 
-//Performing a double spending attack
-const attack_address= Attacker.addressGen();
+const dsa_tx = new Transaction(myWalletAddress,new_address,10);
+dsa_tx.signTransaction(myKey);
+global.smashingCoin.addTransaction(dsa_tx);
 
-const tx2 = new Transaction(myWalletAddress,attack_address,50);
-tx2.signTransaction(myKey);
-global.smashingCoin.addTransaction(tx2);
+console.log(global.smashingCoin.pendingTransactions)
 
-console.log("Starting the miner...");
-global.smashingCoin.minePendingTransactions(myWalletAddress);
-console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
+//console.log("\nStarting the miner...");
+//global.smashingCoin.minePendingTransactions(myWalletAddress);
+//console.log("Your current balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
 
-console.log("Starting the miner again...");
-global.smashingCoin.minePendingTransactions(myWalletAddress);
-console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));

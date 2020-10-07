@@ -1,6 +1,7 @@
 const SHA256 = require('crypto-js/sha256');
 const EC= require('elliptic').ec;
 const ec= new EC('secp256k1');
+const {NetworkObserver}= require('./NetworkObserver');
 
 class Transaction
 {
@@ -42,7 +43,8 @@ class Transaction
         }
 
         const publicKey= ec.keyFromPublic(this.fromAddress, 'hex');
-        console.log("The signature is: "+this.signature);
+        console.log("\nNew Transaction");
+        console.log("\nThe signature is: "+this.signature);
         return publicKey.verify(this.calculateHash(), this.signature);
 
     }
@@ -55,6 +57,7 @@ class CryptoBlock{
      this.precedingHash = precedingHash;
      this.hash = this.computeHash();     
      this.nonce = 0;
+     this.ne=null;
     }
 
     //Function to compute the current hash based on the preceding hash, timestamp, transactions and random nonce
@@ -75,7 +78,9 @@ class CryptoBlock{
       this.nonce++;
       this.hash = this.computeHash();
     }
-    console.log("Block Mined: "+ this.hash)
+    console.log("Block Mined: "+ this.hash);
+    console.log("Timestamp: "+ this.timestamp);
+    //this.ne= new NetworkObserver(this.hash);
   }
 }
 
@@ -84,7 +89,7 @@ class CryptoBlockchain{
         this.blockchain = [this.startGenesisBlock()];   
         this.difficulty = 4;
         this.pendingTransactions = [];
-        this.miningReward = 100;
+        this.miningReward = 0;
     }
 
     //Function to create initial block in the crytocurrency blockchain
@@ -131,10 +136,12 @@ class CryptoBlockchain{
         this.pendingTransactions.push(transaction);
     }
 
- //Function to perform the transaction between the intended sender and recipient blocks given their addresses
+    //Function to perform the transaction between the intended sender and recipient blocks given their addresses
     getBalanceOfAddress(address)
-    {
-        let balance= 0;
+    { 
+        let balance= 10;
+
+        console.log("Initial balance was: "+balance);
 
         for(const block of this.blockchain)
         {
