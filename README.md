@@ -29,7 +29,9 @@ To start the initial blockchain, run the following command after entering the di
 ```node CryptoBlockchain.js```
 
 You will see the created nodes as follows:  
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc.JPG)
+<p align="center">
+  <img width="500" height="400" src="https://github.com/PRISHIta123/web_crawlers/blob/master/bc.JPG">
+</p>
 
 **Additional Security**
 
@@ -41,7 +43,9 @@ To increase security, a random nonce generator is used, that will be used in the
 If a mismatch is found in either of these two steps, the validation function returns an error.  
 
 The resulting cryptocurrency blockchain after integrating these additional functionalities is as follows:  
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc1.JPG)
+<p align="center">
+  <img width="500" height="400" src="https://github.com/PRISHIta123/web_crawlers/blob/master/bc1.JPG">
+</p>
 
 Here, the red highlights denote the appended zeros based on the difficulty index and the green highlights are the random nonces generated to compute the hash for every new block is added.
 
@@ -49,13 +53,17 @@ When we observe and log the output of the check chain validity function, before 
 
 ```console.log("Is the blockchain valid?"+ smashingCoin.checkChainValidity());```
 
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/true.JPG)
+<p align="center">
+  <img width="500" src="https://github.com/PRISHIta123/web_crawlers/blob/master/true.JPG">
+</p>
 
 If instead we try to change the transfer quantity of block 1 from 50 to 200 in the chain, the function returns a value of false, implying an authentication error. 
 
 ```smashingCoin.blockchain[1].data = {amount: 200};```
 
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/false.JPG)
+<p align="center">
+  <img width="500" src="https://github.com/PRISHIta123/web_crawlers/blob/master/false.JPG">
+</p>
 
 **Performing Transactions**  
 
@@ -76,7 +84,9 @@ smashingCoin.minePendingTransactions("myAddress");
 console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
 ```
 
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/transaction.JPG)
+<p align="center">
+  <img width="500" height="400" src="https://github.com/PRISHIta123/web_crawlers/blob/master/transaction.JPG">
+</p>
 
 **Signature**  
 
