@@ -99,5 +99,30 @@ console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress
 
 ![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/sign.JPG)
 
+**Double Spending Attack**  
+
+When a sender tries to perform the same transaction (with the same amount) twice, but with two different receivers, even though his initial balance is not sufficient to satisfy both the transactions, a double spending attack occurs. This can be illustrated in the below example. Considering a sender to have 10 cryptocurrency units, who plans to give these 10 units to 2 different receivers, concurrently, across separate blocks. For both these transactions to occur, a total of 20 units should be available with the sender, whereas he has just 10, implying that he plans to reuse the same money of the first transaction, in the second transaction, such that the 10 units is deducted at the same time (so only 10 units is deducted from his balance finally).
+
+```global.smashingCoin = new CryptoBlockchain();
+
+const recv_address= fetchAddress();
+
+const tx1 = new Transaction(myWalletAddress,recv_address,10);
+tx1.signTransaction(myKey);
+global.smashingCoin.addTransaction(tx1);
+
+console.log(global.smashingCoin.pendingTransactions)
+
+new_address= fetchAddress();
+
+const dsa_tx = new Transaction(myWalletAddress,new_address,10);
+dsa_tx.signTransaction(myKey);
+global.smashingCoin.addTransaction(dsa_tx);
+
+console.log(global.smashingCoin.pendingTransactions)
+```  
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/DSA.JPG)
+
 
 
