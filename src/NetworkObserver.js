@@ -38,6 +38,15 @@ class NetworkObserver
     		console.log("\nYour transaction has been aborted due to a suspected double-spending attack.");
     		console.log("\nPlease cancel your last transaction or try again later.");
     	}
+
+    	for(const trans of this.pending_transactions){
+    		if(trans.fromAddress=== address)
+    		{
+    			this.pending_transactions.pop(trans);
+    		}
+    	}
+
+    	console.log(this.pending_transactions);
     }
 
 }
