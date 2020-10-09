@@ -1,4 +1,5 @@
 const {CryptoBlockchain, Transaction}= require('./CryptoBlockchain');
+const {NetworkObserver} = require('./NetworkObserver');
 const EC= require('elliptic').ec;
 const ec= new EC('secp256k1');
 
@@ -18,7 +19,7 @@ const recvWalletAddress = recvKey.getPublic('hex');
 return recvWalletAddress;
 }
 
-console.log("\nYour initial balance is: "+ 10);
+console.log("\nInitial balance is: "+ 10);
 
 global.smashingCoin = new CryptoBlockchain();
 
@@ -28,15 +29,18 @@ const tx1 = new Transaction(myWalletAddress,recv_address,10);
 tx1.signTransaction(myKey);
 global.smashingCoin.addTransaction(tx1);
 
-console.log(global.smashingCoin.pendingTransactions)
-
 new_address= fetchAddress();
 
 const dsa_tx = new Transaction(myWalletAddress,new_address,10);
 dsa_tx.signTransaction(myKey);
 global.smashingCoin.addTransaction(dsa_tx);
 
-console.log(global.smashingCoin.pendingTransactions)
+console.log("\nThe pending transactions of the blockchain are:");
+console.log(global.smashingCoin.pendingTransactions);
+
+const ne= new NetworkObserver(global.smashingCoin.pendingTransactions);
+
+ne.getRecords(myWalletAddress);
 
 //console.log("\nStarting the miner...");
 //global.smashingCoin.minePendingTransactions(myWalletAddress);
