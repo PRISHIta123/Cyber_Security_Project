@@ -138,6 +138,19 @@ As seen above, the same sender hash address (highlighted in yellow) is involved 
 
 **Network Observers**  
 
+A network observer will check the number of pending transactions from a particular sender address in a blockchain. If the payment amount of two pending transactions from that address is the same, and the total amount is greater than the initial balance of the sender, a transaction aborted error will be displayed, and the user will be prompted to either cancel the last transaction with the same amount, or to try performing the transaction later.  
+
+```
+if(total>balance && num>1)
+{
+console.log("\nYour transaction has been aborted due to a suspected double-spending attack.");
+console.log("\nPlease cancel your last transaction or try again later.");
+}
+```  
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/NO.JPG)
+
+
 
 
 
