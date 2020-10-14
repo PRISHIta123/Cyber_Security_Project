@@ -152,6 +152,8 @@ console.log("\nPlease cancel your last transaction or try again later.");
 
 **Peer Alert Systems**  
 
+In order to disconnect from the block where the fraudulent transaction or double spending attack has taken place, the neighbouring blocks are alerted. Any subsequent transactions that are scheduled for this block are redirected to other routes, and these neighbouring blocks terminate their connections with it. The sender (who wanted to conduct the double spending attack), has to either withdraw any one of the transactions within a given timeout period, or will be blocked temporarily before being able to perform any new transactions again.  
+
 
 
 
