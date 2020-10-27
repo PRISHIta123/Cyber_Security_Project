@@ -157,7 +157,7 @@ In order to disconnect from the block where the fraudulent transaction or double
 Creating four new transactions in the blockchain:  
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas1.JPG">
+  <img width="1000" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas1.JPG">
 </p>
 
 Displaying the current blockchain with the genesis block:  
@@ -167,13 +167,13 @@ Displaying the current blockchain with the genesis block:
 Mining blocks to perform the transactions:  
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas3.JPG">
+  <img width="1000" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas3.JPG">
 </p>
 
 A double spending attack occurs in the blockchain. The network observer throws an error, asking the user to delete the last transaction, or be temporarily suspended. After this, the peer alert system will terminate connections of the other blocks to the fraudulent blocks (alerting neighbouring blocks) as shown below:  
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas4.JPG">
+  <img width="1000" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas4.JPG">
 </p>
 
 Therefore, due to the double spending attack, the number of transactions reduces from four to two (the ones involved in the attack are aborted). The peer alert system will nullify the preceding hash of blocks that had fraudulent blocks preceding them, due to the fact that the preceding hash is used as one of the parameters to calculate the current hash of any block.  
@@ -188,7 +188,7 @@ Finally, after only genuine transactions are contained in the blockchain, they a
 
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas7.JPG">
+  <img width="1000" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas7.JPG">
 </p>
 
 
