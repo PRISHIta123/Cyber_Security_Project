@@ -86,15 +86,18 @@ class CryptoBlock{
 
 class CryptoBlockchain{
     constructor(){
+        this.currenthash = "0";
         this.blockchain = [this.startGenesisBlock()];   
         this.difficulty = 4;
-        this.pendingTransactions = [];
-        this.miningReward = 0;
+        this.pendingTransactions = ["0"];
+        this.miningReward = 10;
     }
 
     //Function to create initial block in the crytocurrency blockchain
     startGenesisBlock(){
-        return new CryptoBlock(0, "01/05/2020", "Initial Block in the Chain", "0");
+        let cb= new CryptoBlock(0,Date.now(),"0");
+        this.currenthash = cb.hash;
+        return cb;
     }
 
     //Function to receive the latest block in the cryptocurrency blockchain
@@ -105,15 +108,15 @@ class CryptoBlockchain{
     //Function to add an additional block to the blockchain and create an empty transaction for this block
     minePendingTransactions(miningRewardAddress)
     {
-        let block= new CryptoBlock(Date.now(), this.pendingTransactions);
+        let block= new CryptoBlock(Date.now(), this.pendingTransactions, this.currenthash);
         block.mineBlock(this.difficulty);
 
         console.log('Block successfully mined!');
         this.blockchain.push(block);
+        //Pop the completed transaction
+        //this.pendingTransactions.push(new Transaction(null, miningRewardAddress, this.miningReward));
 
-        this.pendingTransactions= [
-        new Transaction(null, miningRewardAddress, this.miningReward)
-        ];
+        this.currenthash= block.hash;
 
     }
 
@@ -136,25 +139,31 @@ class CryptoBlockchain{
         this.pendingTransactions.push(transaction);
     }
 
+
     //Function to perform the transaction between the intended sender and recipient blocks given their addresses
     getBalanceOfAddress(address)
     { 
-        let balance= 10;
-
-        console.log("Initial balance was: "+balance);
+        var balance= 10;
+        console.log("\nInitial balance was: "+balance);
 
         for(const block of this.blockchain)
         {
-            for(const trans of block.transactions)
+ 
+            if(block.transactions.length>0)
             {
-                if(trans.fromAddress === address)
+                for(const trans of block.transactions)
                 {
-                    balance-= trans.amount;
-                }
+                    if(trans.fromAddress === address)
+                    {
+                        balance-= trans.amount;
+                        //this.pendingTransactions.splice(this.pendingTransactions.indexOf(trans),1);
+                    }
 
-                if(trans.toAddress === address)
-                {
-                    balance+= trans.amount;
+                    if(trans.toAddress === address)
+                    {
+                        balance+= trans.amount;
+                    }
+
                 }
             }
         }
@@ -184,6 +193,7 @@ class CryptoBlockchain{
 }
 
 module.exports.CryptoBlockchain= CryptoBlockchain;
+module.exports.CryptoBlock= CryptoBlock;
 module.exports.Transaction= Transaction;
 
 
