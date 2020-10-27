@@ -30,7 +30,7 @@ To start the initial blockchain, run the following command after entering the di
 
 You will see the created nodes as follows:  
 <p align="left">
-  <img width="600" height="500" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc.JPG">
+  <img width="600" height="500" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/bc.JPG">
 </p>
 
 **Additional Security**
@@ -44,7 +44,7 @@ If a mismatch is found in either of these two steps, the validation function ret
 
 The resulting cryptocurrency blockchain after integrating these additional functionalities is as follows:  
 <p align="left">
-  <img width="600" height="500" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/bc1.JPG">
+  <img width="600" height="500" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/bc1.JPG">
 </p>
 
 Here, the red highlights denote the appended zeros based on the difficulty index and the green highlights are the random nonces generated to compute the hash for every new block is added.
@@ -54,7 +54,7 @@ When we observe and log the output of the check chain validity function, before 
 ```console.log("Is the blockchain valid?"+ smashingCoin.checkChainValidity());```
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/true.JPG">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/true.JPG">
 </p>
 
 If instead we try to change the transfer quantity of block 1 from 50 to 200 in the chain, the function returns a value of false, implying an authentication error. 
@@ -62,7 +62,7 @@ If instead we try to change the transfer quantity of block 1 from 50 to 200 in t
 ```smashingCoin.blockchain[1].data = {amount: 200};```
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/false.JPG">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/false.JPG">
 </p>
 
 **Performing Transactions**  
@@ -85,7 +85,7 @@ console.log("Your balance is: "+smashingCoin.getBalanceOfAddress('myAddress'));
 ```
 
 <p align="left">
-  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/transaction.JPG">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/transaction.JPG">
 </p>
 
 **Signature**  
@@ -107,7 +107,7 @@ smashingCoin.minePendingTransactions(myWalletAddress);
 console.log("Your balance is: "+smashingCoin.getBalanceOfAddress(myWalletAddress));
 ```
 
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/sign.JPG)
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/sign.JPG)
 
 **Double Spending Attack**  
 
@@ -132,7 +132,7 @@ global.smashingCoin.addTransaction(dsa_tx);
 console.log(global.smashingCoin.pendingTransactions)
 ```  
 
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/DSA.JPG)
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/DSA.JPG)
 
 As seen above, the same sender hash address (highlighted in yellow) is involved in two transactions of 10 cryptocurrency units each (underlined in blue), but with different receiver hash addresses. Thus, if these 2 transactions are performed simultaneously (i.e. at the same timestamp), only 10 units will be deducted from his balance at the same time, whereas his actual deduction amount should be 20. The sender can thus exploit this issue to his advantage, and perform many such transactions, but by paying only half the actual amount.  
 
@@ -148,11 +148,49 @@ console.log("\nPlease cancel your last transaction or try again later.");
 }
 ```  
 
-![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/NO.JPG)
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/NO.JPG)
 
 **Peer Alert Systems**  
 
 In order to disconnect from the block where the fraudulent transaction or double spending attack has taken place, the neighbouring blocks are alerted. Any subsequent transactions that are scheduled for this block are redirected to other routes, and these neighbouring blocks terminate their connections with it. The sender (who wanted to conduct the double spending attack), has to either withdraw any one of the transactions within a given timeout period, or will be blocked temporarily before being able to perform any new transactions again.  
+
+Creating four new transactions in the blockchain:  
+
+<p align="left">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas1.JPG">
+</p>
+
+Displaying the current blockchain with the genesis block:  
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas2.JPG)
+
+Mining blocks to perform the transactions:  
+
+<p align="left">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas3.JPG">
+</p>
+
+A double spending attack occurs in the blockchain. The network observer throws an error, asking the user to delete the last transaction, or be temporarily suspended. After this, the peer alert system will terminate connections of the other blocks to the fraudulent blocks (alerting neighbouring blocks) as shown below:  
+
+<p align="left">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas4.JPG">
+</p>
+
+Therefore, due to the double spending attack, the number of transactions reduces from four to two (the ones involved in the attack are aborted). The peer alert system will nullify the preceding hash of blocks that had fraudulent blocks preceding them, due to the fact that the preceding hash is used as one of the parameters to calculate the current hash of any block.  
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas5.JPG)
+
+To overcome this issue of having a null preceding hash, this block is replaced with a new genesis block, with a preceding hash of '0'. This will also lead to a new current hash being generated, that can be used to perform the same transaction as before (Change of transaction route).  
+
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas6.JPG)
+
+Finally, after only genuine transactions are contained in the blockchain, they are processed, and the balances of each of the addresses are updated accordingly.  
+
+
+<p align="left">
+  <img width="600" src="https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/pas7.JPG">
+</p>
+
 
 
 
