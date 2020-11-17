@@ -22,6 +22,11 @@ Additionally, to notify the sender and receiver about the unauthorized transacti
 * When a network observer observes an anomaly at one of the transaction steps between a node-pair, the surrounding nodes are alerted about the fraudulent transaction. 
 * This will help the neighbouring nodes terminate their connections with the fraudulent node pair, such that their transactions can be performed along other safe routes. 
 
+## Blockchain Architecture  
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/arch.JPG)
+
+## Model Overview  
+![alt text](https://github.com/PRISHIta123/Cyber_Security_Project/blob/master/screenshots/model.JPG)
 
 ## Implementation
 To start the initial blockchain, run the following command after entering the directory from the command line or terminal:  
